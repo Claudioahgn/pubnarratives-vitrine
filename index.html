@@ -51,7 +51,7 @@
 <body class="bg-warm-50 text-warm-900 font-sans antialiased selection:bg-amber-100 selection:text-amber-900">
 
     <!-- BARRE DE NAVIGATION -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-warm-50/90 border-b border-warm-200">
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-warm-50/90 border-b border-warm-200">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             
             <a href="#" class="flex items-center gap-2">
@@ -90,12 +90,21 @@
                     Une photo statique de vos lotions, coffrets ou accessoires ne prouve rien. Nous créons des vidéos courtes qui racontent une histoire : la fin des cheveux secs et rebelles. Montrez l'efficacité de vos soins en action et transformez vos vues en ventes.
                 </p>
 
+                <!-- BOUTONS D'ACTION (DIRECT + TRANSITOIRE LEAD GENERATOR + DÉMO) -->
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                    <!-- CTA Direct -->
                     <a href="#tarifs" class="w-full sm:w-auto bg-amberAccent-500 hover:bg-amberAccent-600 text-white font-bold px-8 py-4 rounded-xl text-base transition-all shadow-lg text-center">
                         Commander ma vidéo
                     </a>
-                    <a href="#demo" class="w-full sm:w-auto bg-white hover:bg-warm-100 border border-warm-300 text-warm-900 font-bold px-6 py-4 rounded-xl text-base transition-all text-center flex items-center justify-center gap-2 shadow-sm">
-                        <i data-lucide="play" class="w-4 h-4 text-amberAccent-500"></i> Voyez le résultat
+                    
+                    <!-- CTA Transitoire (Ouvre la pop-up du guide) -->
+                    <button type="button" onclick="openLeadModal()" class="w-full sm:w-auto bg-white hover:bg-warm-100 border border-warm-300 text-warm-900 font-bold px-6 py-4 rounded-xl text-base transition-all text-center flex items-center justify-center gap-2 shadow-sm">
+                        <i data-lucide="book-open" class="w-4 h-4 text-amberAccent-500"></i> Télécharger le guide (Offert)
+                    </button>
+                    
+                    <!-- Lien Démo Vidéo -->
+                    <a href="#demo" class="text-xs font-bold text-stone-500 hover:text-warm-900 transition-colors flex items-center gap-1 sm:pt-0 pt-2">
+                        <i data-lucide="play" class="w-3.5 h-3.5 text-amberAccent-500"></i> Voir la démo
                     </a>
                 </div>
             </div>
@@ -158,201 +167,4 @@
                         </p>
                     </div>
 
-                    <div class="bg-white border border-warm-200 p-8 rounded-2xl space-y-4 shadow-sm">
-                        <h3 class="font-bold text-xl text-warm-900">2. La solution évidente</h3>
-                        <p class="text-stone-600 text-sm">
-                            Vos produits entrent en scène. Grâce à nos visuels avancés, nous démontrons l'application de vos soins ou de vos outils et leur effet immédiat.
-                        </p>
-                    </div>
-
-                    <div class="bg-white border border-warm-200 p-8 rounded-2xl space-y-4 shadow-sm">
-                        <h3 class="font-bold text-xl text-warm-900">3. La victoire</h3>
-                        <p class="text-stone-600 text-sm">
-                            Une chevelure éclatante et un rituel apaisé. La vidéo se termine par une invitation limpide à cliquer pour commander.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4 : THE GUIDE -->
-        <section class="py-16 px-4 bg-white border-b border-warm-200">
-            <div class="max-w-4xl mx-auto space-y-4 text-center">
-                <h2 class="text-xl font-bold text-warm-900">Nous savons qu'il est difficile de valoriser d'excellents produits capillaires face aux industriels.</h2>
-                <p class="text-stone-600 text-sm">C'est pourquoi nous mettons notre expertise narrative à votre service pour révéler la vraie valeur de votre marque.</p>
-            </div>
-        </section>
-
-        <!-- SECTION 5 : THE PLAN -->
-        <section id="etapes" class="py-20 px-4 bg-warm-50 border-b border-warm-200">
-            <div class="max-w-5xl mx-auto space-y-12">
-                <div class="text-center space-y-3">
-                    <h2 class="text-2xl md:text-3xl font-black text-warm-900">
-                        Votre vidéo prête en 3 étapes simples
-                    </h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white border border-warm-200 p-6 rounded-2xl space-y-4 shadow-sm">
-                        <div class="w-8 h-8 rounded-full bg-amberAccent-500 text-white font-bold flex items-center justify-center text-sm">1</div>
-                        <h3 class="font-bold text-lg text-warm-900">Partagez votre lien</h3>
-                        <p class="text-stone-600 text-sm">
-                            Collez l'URL de votre produit lors de la commande. Nous récupérons les photos et les détails de votre soin ou accessoire pour vous faire gagner du temps.
-                        </p>
-                    </div>
-
-                    <div class="bg-white border border-warm-200 p-6 rounded-2xl space-y-4 shadow-sm">
-                        <div class="w-8 h-8 rounded-full bg-amberAccent-500 text-white font-bold flex items-center justify-center text-sm">2</div>
-                        <h3 class="font-bold text-lg text-warm-900">Scénarisation et Montage</h3>
-                        <p class="text-stone-600 text-sm">
-                            Nous rédigeons l'histoire, créons le rendu visuel dynamique de votre produit et livrons une vidéo avec voix off sous 48h.
-                        </p>
-                    </div>
-
-                    <div class="bg-white border border-warm-200 p-6 rounded-2xl space-y-4 shadow-sm">
-                        <div class="w-8 h-8 rounded-full bg-amberAccent-500 text-white font-bold flex items-center justify-center text-sm">3</div>
-                        <h3 class="font-bold text-lg text-warm-900">Diffusez et Vendez</h3>
-                        <p class="text-stone-600 text-sm">
-                            Publiez la vidéo sur vos canaux de vente (TikTok, Instagram, WhatsApp, Ads) et encaissez les commandes sur votre boutique.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 6 : THE EXPLANATORY PARAGRAPH -->
-        <section id="faq" class="py-20 px-4 bg-white border-b border-warm-200">
-            <div class="max-w-3xl mx-auto space-y-6 text-center">
-                <h2 class="text-2xl font-black text-warm-900">Ne laissez plus votre gamme prendre la poussière numérique.</h2>
-                <p class="text-stone-600 text-base leading-relaxed">
-                    Chez PubNarratives, nous croyons qu'aucune marque de soins capillaires ne devrait voir ses ventes stagner à cause de visuels amateurs. Vos clientes ont besoin d'être rassurées avant d'acheter. En utilisant des scénarios qui parlent de leurs douleurs quotidiennes, nous faisons de vos produits la seule solution logique. Choisissez votre pack aujourd'hui, et offrez à votre marque la mise en scène qu'elle mérite.
-                </p>
-            </div>
-        </section>
-
-        <!-- SECTION 7 : THE VIDEO -->
-        <section id="demo" class="py-20 px-4 bg-warm-100/50 border-b border-warm-200">
-            <div class="max-w-3xl mx-auto space-y-8 text-center">
-                <div class="space-y-3">
-                    <h2 class="text-2xl font-black text-warm-900">
-                        Voyez le résultat par vous-même
-                    </h2>
-                    <p class="text-stone-600 text-sm">Le contraste entre une image fixe et une vidéo qui raconte une histoire.</p>
-                </div>
-
-                <!-- Mockup Smartphone 9:16 -->
-                <div class="relative w-full max-w-[280px] sm:max-w-[300px] aspect-[9/16] mx-auto bg-stone-900 rounded-[2.5rem] p-3 border-4 border-stone-800 shadow-xl glow-phone">
-                    <div class="absolute top-6 left-1/2 -translate-x-1/2 w-20 h-4 bg-stone-800 rounded-full z-20 pointer-events-none"></div>
-
-                    <div class="relative w-full h-full rounded-[2rem] overflow-hidden bg-black flex items-center justify-center">
-                        <video 
-                            src="videos/demo.mp4" 
-                            controls 
-                            playsinline 
-                            class="w-full h-full object-cover rounded-[2rem]">
-                        </video>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 8 : PRICE CHOICES -->
-        <section id="tarifs" class="py-20 px-4 bg-white border-b border-warm-200">
-            <div class="max-w-5xl mx-auto space-y-12">
-                <div class="text-center space-y-3">
-                    <h2 class="text-2xl md:text-3xl font-black text-warm-900">
-                        Rentable dès votre première vente
-                    </h2>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-                    
-                    <!-- Palier 1 -->
-                    <div class="bg-warm-50 border border-warm-200 p-8 rounded-3xl space-y-6 flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <p class="text-xs font-bold text-stone-500 uppercase tracking-widest">Flash-Test</p>
-                            <div>
-                                <span class="text-4xl font-black text-warm-900">30</span>
-                                <span class="text-stone-500 font-bold">€</span>
-                            </div>
-                            <ul class="space-y-3 text-sm text-stone-700">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> 1 vidéo (45-60s)</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Format vertical 9:16</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Scénario persuasif</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Livraison sous 48h</li>
-                            </ul>
-                        </div>
-                        <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="w-full block bg-white border border-warm-300 hover:bg-warm-100 text-warm-900 font-bold py-3 rounded-xl text-sm text-center transition-colors">
-                            Commander (30 €)
-                        </a>
-                    </div>
-
-                    <!-- Palier 2 -->
-                    <div class="bg-white border-2 border-amberAccent-500 p-8 rounded-3xl space-y-6 flex flex-col justify-between relative shadow-lg glow-amber">
-                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amberAccent-500 text-white font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
-                            Recommandé
-                        </div>
-                        <div class="space-y-4 pt-2">
-                            <p class="text-xs font-bold text-amberAccent-600 uppercase tracking-widest">Pack Lancement</p>
-                            <div>
-                                <span class="text-5xl font-black text-warm-900">75</span>
-                                <span class="text-stone-500 font-bold">€</span>
-                            </div>
-                            <ul class="space-y-3 text-sm text-stone-700">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> <strong>3 vidéos distinctes</strong></li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Idéal pour tester 3 angles</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Sous-titres inclus</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Livraison sous 72h</li>
-                            </ul>
-                        </div>
-                        <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="w-full block bg-amberAccent-500 hover:bg-amberAccent-600 text-white font-bold py-3.5 rounded-xl text-sm text-center transition-colors">
-                            Commander (75 €)
-                        </a>
-                    </div>
-
-                    <!-- Palier 3 -->
-                    <div class="bg-warm-50 border border-warm-200 p-8 rounded-3xl space-y-6 flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <p class="text-xs font-bold text-stone-500 uppercase tracking-widest">Trafic Continu</p>
-                            <div>
-                                <span class="text-4xl font-black text-warm-900">220</span>
-                                <span class="text-stone-500 font-bold">€ / mois</span>
-                            </div>
-                            <ul class="space-y-3 text-sm text-stone-700">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> 10 vidéos par mois</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Formats multiples</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Priorité VIP</li>
-                            </ul>
-                        </div>
-                        <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="w-full block bg-white border border-warm-300 hover:bg-warm-100 text-warm-900 font-bold py-3 rounded-xl text-sm text-center transition-colors">
-                            S'abonner (220 €)
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- SECTION 9 : JUNK DRAWER (FOOTER) -->
-    <footer class="py-8 px-4 bg-warm-900 text-stone-400 text-xs text-center">
-        <div class="flex justify-center mb-4">
-            <img src="images/logo-pubnarratives.jpg" alt="Logo PubNarratives" class="h-6 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mix-blend-screen">
-        </div>
-        <p class="font-bold text-white mb-2 tracking-widest">PUBNARRATIVES</p>
-        <p>© 2026 Tous droits réservés. Paiements sécurisés via ComeUp.fr.</p>
-        <div class="mt-4 flex justify-center items-center gap-4">
-            <a href="#" class="hover:text-white transition-colors">Mentions légales</a>
-            <span>|</span>
-            <a href="https://www.instagram.com/pubnarratives?stkn=eHE4c3kyZHJxbHZ2" target="_blank" class="flex items-center gap-1 hover:text-white transition-colors">
-                <i data-lucide="instagram" class="w-3.5 h-3.5"></i> Rejoignez-nous sur Instagram
-            </a>
-        </div>
-    </footer>
-
-    <script>
-        lucide.createIcons();
-    </script>
-</body>
-</html>
+                    <div class="bg-white
