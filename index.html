@@ -376,8 +376,11 @@
                 Découvrez pourquoi vos photos passent inaperçues sur Instagram et comment doubler vos commandes dès cette semaine sans dépenser un euro en studio photo.
             </p>
 
-            <!-- Formulaire Formspree (Compatible Firebase) -->
-            <form action="https://formspree.io/f/VOTRE_FORM_ID" method="POST" class="space-y-4">
+            <!-- Formulaire Web3Forms avec votre clé d'accès -->
+            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                <input type="hidden" name="access_key" value="82abc08e-6c5e-4c5b-8384-d4846a007c3a" />
+                <input type="hidden" name="subject" value="Nouveau prospect PubNarratives - Guide Gratuit" />
+                <input type="hidden" name="from_name" value="PubNarratives Lead Generator" />
                 
                 <div>
                     <label for="lead-name" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">Votre Prénom ou Nom de Marque</label>
@@ -431,8 +434,8 @@
         function closeLeadModal() {
             modal.classList.add('opacity-0', 'pointer-events-none');
             modal.classList.remove('opacity-100', 'pointer-events-auto');
-            container.classList.add('scale-95');
-            container.classList.remove('scale-100');
+            container.classList.remove('scale-95');
+            container.classList.add('scale-100');
             sessionStorage.setItem('lead_modal_dismissed', 'true');
         }
 
