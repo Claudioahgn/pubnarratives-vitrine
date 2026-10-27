@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FT335PD0HX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-FT335PD0HX');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PubNarratives | Vidéos Publicitaires pour Soins Capillaires</title>
+    <title>PubNarratives | Des vidéos publicitaires qui font choisir votre offre</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -20,450 +12,983 @@
             theme: {
                 extend: {
                     colors: {
-                        warm: {
-                            50: '#FDFBF7',
-                            100: '#F7F4EE',
-                            200: '#EFEAE1',
-                            800: '#292524',
-                            900: '#1C1917',
+                        obsidian: {
+                            950: '#050507',
+                            900: '#09090B',
+                            850: '#0F0F12',
+                            800: '#141418',
                         },
-                        amberAccent: {
+                        amberLuxe: {
+                            400: '#F59E0B',
                             500: '#D97706',
                             600: '#B45309',
-                            700: '#92400E',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Menlo', 'monospace'],
+                    },
+                    animation: {
+                        marquee: 'marquee 28s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
                         }
                     }
                 }
             }
         }
     </script>
-    <!-- Lucide Icons -->
+
+    <!-- Three.js (r128) & Lucide Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        .glow-amber {
-            box-shadow: 0 10px 30px -5px rgba(217, 119, 6, 0.15);
+        .glass-panel {
+            background: rgba(15, 15, 18, 0.72);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .glow-phone {
-            box-shadow: 0 25px 50px -12px rgba(28, 25, 23, 0.25);
+        .glass-panel-hover {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-panel-hover:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(217, 119, 6, 0.4);
+            transform: translateY(-2px);
+        }
+        .text-glow {
+            text-shadow: 0 0 35px rgba(255, 255, 255, 0.12);
+        }
+        .glow-featured {
+            box-shadow: 0 0 50px -10px rgba(217, 119, 6, 0.25);
+        }
+        details summary::-webkit-details-marker {
+            display: none;
         }
     </style>
 </head>
-<body class="bg-warm-50 text-warm-900 font-sans antialiased selection:bg-amber-100 selection:text-amber-900">
+<body class="bg-obsidian-950 text-stone-100 font-sans antialiased selection:bg-amberLuxe-500 selection:text-black overflow-x-hidden">
 
-    <!-- BARRE DE NAVIGATION -->
-    <header class="sticky top-0 z-40 backdrop-blur-md bg-warm-50/90 border-b border-warm-200">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-2">
-                <img src="images/logo-pubnarratives.jpg" alt="Logo PubNarratives" class="h-11 w-auto mix-blend-multiply">
-                <span class="font-black text-lg tracking-wider text-warm-900 hidden sm:block">PUBNARRATIVES</span>
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-warm-200 text-warm-800 uppercase tracking-widest ml-1">Capillaire</span>
-            </a>
+    <!-- CANVAS THREE.JS (RÉGLAGES SPRINT 1 : DISCRET, PARTICULES DORÉES RÉACTIVES) -->
+    <canvas id="webgl-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-50"></canvas>
 
-            <nav class="hidden md:flex items-center gap-8 text-sm font-bold text-stone-600">
-                <a href="#enjeux" class="hover:text-amberAccent-600 transition-colors">Le Problème</a>
-                <a href="#methode" class="hover:text-amberAccent-600 transition-colors">La Solution</a>
-                <a href="#etapes" class="hover:text-amberAccent-600 transition-colors">Comment Commander</a>
-            </nav>
-            <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="bg-amberAccent-500 hover:bg-amberAccent-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-md flex items-center gap-2">
-                Commander (Dès 30 €)
-            </a>
-        </div>
-    </header>
+    <!-- WRAPPER GLOBAL -->
+    <div class="relative z-10 flex flex-col min-h-screen">
 
-    <main>
-        <!-- SECTION 1 : THE HEADER -->
-        <section class="relative py-20 md:py-28 px-4 overflow-hidden border-b border-warm-200">
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-100/40 via-transparent to-transparent"></div>
-            
-            <div class="max-w-3xl mx-auto text-center relative z-10 space-y-6">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-warm-200 text-amberAccent-600 text-xs font-bold uppercase tracking-wider shadow-sm">
-                    Courtes vidéos publicitaires
-                </div>
+        <!-- NAVIGATION FLOTTANTE ÉPURÉE (STYLE FRAMEWORK) -->
+        <header class="sticky top-6 z-40 max-w-5xl mx-auto w-full px-4">
+            <div class="glass-panel rounded-full px-6 h-16 flex items-center justify-between shadow-2xl">
+                
+                <!-- Logo & Identité -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-8 h-8 rounded-xl bg-white/[0.05] border border-white/10 flex items-center justify-center p-1 group-hover:border-amberLuxe-500/50 transition-colors">
+                        <img src="images/logo-pubnarratives.jpg" alt="Logo" class="w-full h-full object-contain filter invert mix-blend-screen">
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-black text-sm tracking-widest text-white">PUBNARRATIVES</span>
+                        <span class="text-[9px] font-mono tracking-widest text-stone-400">STUDIO NARRATIF</span>
+                    </div>
+                </a>
 
-                <h1 class="text-4xl md:text-5xl font-black tracking-tight text-warm-900 leading-tight">
-                    Vos clientes n'achètent pas de simples produits. <br>
-                    Elles achètent <span class="text-transparent bg-clip-text bg-gradient-to-r from-amberAccent-600 to-amber-700">la fin de la frustration capillaire</span>.
-                </h1>
+                <!-- Liens de navigation simplifiés -->
+                <nav class="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-stone-300">
+                    <a href="#enjeux" class="hover:text-amberLuxe-400 transition-colors">Le Constat</a>
+                    <a href="#methode" class="hover:text-amberLuxe-400 transition-colors">La Méthode</a>
+                    <a href="#demo" class="hover:text-amberLuxe-400 transition-colors">Exemple</a>
+                    <a href="#tarifs" class="hover:text-amberLuxe-400 transition-colors">Tarifs</a>
+                </nav>
 
-                <p class="text-lg text-stone-600 max-w-xl mx-auto leading-relaxed">
-                    Une photo statique de vos lotions, coffrets ou accessoires ne prouve rien. Nous créons des vidéos courtes qui racontent une histoire : la fin des cheveux secs et rebelles. Montrez l'efficacité de vos soins en action et transformez vos vues en ventes.
-                </p>
-
-                <!-- BOUTONS D'ACTION (DIRECT + TRANSITOIRE LEAD GENERATOR + DÉMO) -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                    <a href="#tarifs" class="w-full sm:w-auto bg-amberAccent-500 hover:bg-amberAccent-600 text-white font-bold px-8 py-4 rounded-xl text-base transition-all shadow-lg text-center">
-                        Commander ma vidéo
-                    </a>
-                    
-                    <button type="button" onclick="openLeadModal()" class="w-full sm:w-auto bg-white hover:bg-warm-100 border border-warm-300 text-warm-900 font-bold px-6 py-4 rounded-xl text-base transition-all text-center flex items-center justify-center gap-2 shadow-sm">
-                        <i data-lucide="book-open" class="w-4 h-4 text-amberAccent-500"></i> Télécharger le guide (Offert)
-                    </button>
-                    
-                    <a href="#demo" class="text-xs font-bold text-stone-500 hover:text-warm-900 transition-colors flex items-center gap-1 sm:pt-0 pt-2">
-                        <i data-lucide="play" class="w-3.5 h-3.5 text-amberAccent-500"></i> Voir la démo
-                    </a>
-                </div>
+                <!-- CTA Direct -->
+                <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="bg-white hover:bg-stone-200 text-obsidian-950 font-bold px-5 py-2.5 rounded-full text-xs tracking-wide transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-2 shadow-lg shadow-white/5">
+                    Commander ma vidéo <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
             </div>
-        </section>
+        </header>
 
-        <!-- SECTION 2 : THE STAKES -->
-        <section id="enjeux" class="py-20 px-4 bg-white border-b border-warm-200">
-            <div class="max-w-5xl mx-auto space-y-12">
-                <div class="text-center space-y-3">
-                    <h2 class="text-2xl md:text-3xl font-black text-warm-900">
-                        Vendre avec de simples photos vous coûte des clientes
-                    </h2>
+        <main class="flex-grow">
+            <!-- SECTION 1 : THE HERO (GRUNT TEST EN 5 SECONDES - GLOBAL & INCLUSIF) -->
+            <section class="relative pt-24 pb-20 md:pt-32 md:pb-28 px-4">
+                <div class="max-w-4xl mx-auto text-center space-y-8">
+                    
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-panel text-[11px] font-mono tracking-widest text-amberLuxe-400 uppercase">
+                        <i data-lucide="clapperboard" class="w-3.5 h-3.5"></i> Fini les budgets publicitaires brûlés dans le vide
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.08] text-glow">
+                        Vos offres méritent d'être choisies, <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-stone-100 via-amberLuxe-400 to-amberLuxe-500">pas ignorées dans le flux des réseaux</span>.
+                    </h1>
+
+                    <p class="text-base sm:text-lg md:text-xl text-stone-300 max-w-2xl mx-auto leading-relaxed font-normal">
+                        Un visuel figé ou une fiche technique ne prouvent rien. Vos prospects n'achètent pas une liste de fonctionnalités : ils cherchent une solution immédiate à leur problème quotidien. Nous créons des vidéos de 45 secondes qui rendent l'utilité de votre offre évidente et déclenchent la commande.
+                    </p>
+
+                    <!-- Double CTA -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                        <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="w-full sm:w-auto bg-amberLuxe-500 hover:bg-amberLuxe-400 text-obsidian-950 font-black px-8 py-4 rounded-2xl text-sm transition-all transform hover:-translate-y-0.5 shadow-xl shadow-amberLuxe-500/20 flex items-center justify-center gap-2">
+                            Lancer ma vidéo publicitaire (Dès 30 €) <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <button onclick="openLeadModal()" class="w-full sm:w-auto glass-panel glass-panel-hover text-stone-200 font-bold px-6 py-4 rounded-2xl text-sm transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="file-text" class="w-4 h-4 text-amberLuxe-400"></i> Guide gratuit : 5 Erreurs Publicitaires
+                        </button>
+                    </div>
+
+                    <!-- Modules de Réassurance -->
+                    <div class="pt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
+                        <div class="glass-panel p-5 rounded-2xl space-y-2">
+                            <div class="text-amberLuxe-400 font-mono text-xs flex items-center gap-2 font-bold tracking-wider">
+                                <span class="w-6 h-6 rounded-lg bg-amberLuxe-500/10 border border-amberLuxe-500/20 flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-amberLuxe-400"></i>
+                                </span>
+                                PRÊT SOUS 48H
+                            </div>
+                            <p class="text-xs text-stone-300 font-medium leading-relaxed">
+                                Transmettez simplement le lien de votre page ou votre idée. Zéro tournage à organiser.
+                            </p>
+                        </div>
+
+                        <div class="glass-panel p-5 rounded-2xl space-y-2">
+                            <div class="text-amberLuxe-400 font-mono text-xs flex items-center gap-2 font-bold tracking-wider">
+                                <span class="w-6 h-6 rounded-lg bg-amberLuxe-500/10 border border-amberLuxe-500/20 flex items-center justify-center">
+                                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-amberLuxe-400"></i>
+                                </span>
+                                PAIEMENT PROTÉGÉ
+                            </div>
+                            <p class="text-xs text-stone-300 font-medium leading-relaxed">
+                                Vos fonds restent sécurisés sur ComeUp jusqu'à votre entière validation.
+                            </p>
+                        </div>
+
+                        <div class="glass-panel p-5 rounded-2xl space-y-2">
+                            <div class="text-amberLuxe-400 font-mono text-xs flex items-center gap-2 font-bold tracking-wider">
+                                <span class="w-6 h-6 rounded-lg bg-amberLuxe-500/10 border border-amberLuxe-500/20 flex items-center justify-center">
+                                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amberLuxe-400"></i>
+                                </span>
+                                CLARTÉ IMMÉDIATE
+                            </div>
+                            <p class="text-xs text-stone-300 font-medium leading-relaxed">
+                                Une narration si limpide que votre prospect comprend son bénéfice en 5 secondes.
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
+            </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-warm-50 border border-warm-200 p-6 rounded-2xl space-y-3">
-                        <div class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold">❌</div>
-                        <h3 class="font-bold text-lg text-warm-900">Le piège de la photo figée</h3>
-                        <p class="text-stone-600 text-sm">
-                            Sur fond blanc, votre flacon ou votre accessoire ressemble à n'importe quel produit de supermarché. Sans voir le résultat, la cliente refuse de payer votre juste prix.
+            <!-- SECTION 2 : THE STAKES / LE CONSTAT -->
+            <section id="enjeux" class="py-24 px-4 border-t border-white/[0.05] relative">
+                <div class="max-w-5xl mx-auto space-y-16">
+                    
+                    <div class="max-w-2xl space-y-4">
+                        <div class="inline-flex items-center gap-2 text-xs font-mono text-amberLuxe-400 tracking-widest uppercase">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 01 // Le Piège du Quotidien
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                            Avoir une offre remarquable ne sert à rien si personne ne s'arrête pour l'écouter.
+                        </h2>
+                        <p class="text-stone-400 text-sm sm:text-base leading-relaxed">
+                            Sur les réseaux, votre audience voit défiler des centaines de publications par minute. Sans une raison viscérale de s'arrêter, elle passe son chemin.
                         </p>
                     </div>
 
-                    <div class="bg-warm-50 border border-warm-200 p-6 rounded-2xl space-y-3">
-                        <div class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold">❌</div>
-                        <h3 class="font-bold text-lg text-warm-900">Le doute sur l'efficacité</h3>
-                        <p class="text-stone-600 text-sm">
-                            Sans voir l'hydratation pénétrer la fibre ou l'outil glisser en douceur, l'acheteuse craint d'abîmer ses longueurs et ne commande pas.
-                        </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-5 flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-amberLuxe-400 font-mono text-xs font-bold">
+                                    01
+                                </div>
+                                <h3 class="text-lg font-bold text-white tracking-wide">
+                                    L'indifférence qui coûte cher
+                                </h3>
+                                <p class="text-xs text-stone-400 leading-relaxed">
+                                    La majorité des annonces crient « Regardez ce que je fais ». Mais votre prospect ne s'intéresse qu'à ses propres urgences. Sans tension formulée dès les premières secondes, votre budget publicitaire est balayé d'un coup de pouce.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/[0.05] flex items-center gap-2 text-[11px] font-mono text-stone-500">
+                                <i data-lucide="eye-off" class="w-3.5 h-3.5 text-stone-400"></i> Vos vues ne convertissent pas
+                            </div>
+                        </div>
+
+                        <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-5 flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-amberLuxe-400 font-mono text-xs font-bold">
+                                    02
+                                </div>
+                                <h3 class="text-lg font-bold text-white tracking-wide">
+                                    L'effort de trop pour le prospect
+                                </h3>
+                                <p class="text-xs text-stone-400 leading-relaxed">
+                                    Une image fixe ou une fiche technique montre votre offre, mais n'en prouve pas la valeur. Dès qu'un prospect doit faire un effort pour comprendre ce qu'il y gagne, il quitte la page.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/[0.05] flex items-center gap-2 text-[11px] font-mono text-stone-500">
+                                <i data-lucide="help-circle" class="w-3.5 h-3.5 text-stone-400"></i> Le doute tue la décision
+                            </div>
+                        </div>
+
+                        <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-5 flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-amberLuxe-400 font-mono text-xs font-bold">
+                                    03
+                                </div>
+                                <h3 class="text-lg font-bold text-white tracking-wide">
+                                    La spirale des remises forcées
+                                </h3>
+                                <p class="text-xs text-stone-400 leading-relaxed">
+                                    Faute d'un récit qui valorise le résultat concret que vous apportez, votre solution paraît interchangeable avec celle de vos concurrents. Vous finissez par casser vos marges pour espérer déclencher des ventes.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/[0.05] flex items-center gap-2 text-[11px] font-mono text-stone-500">
+                                <i data-lucide="trending-down" class="w-3.5 h-3.5 text-stone-400"></i> Perte de marge directe
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="bg-warm-50 border border-warm-200 p-6 rounded-2xl space-y-3">
-                        <div class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold">❌</div>
-                        <h3 class="font-bold text-lg text-warm-900">Les bénéfices invisibles</h3>
-                        <p class="text-stone-600 text-sm">
-                            Une image fixe ne peut pas expliquer la texture onctueuse de votre crème, l'odeur de votre soin, ou la flexibilité de vos accessoires.
-                        </p>
+                    <div class="glass-panel rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-l-2 border-l-amberLuxe-500">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amberLuxe-400 flex-shrink-0"></i>
+                            <p class="text-xs text-stone-300 font-medium">
+                                Votre offre ne manque pas de valeur. Elle a simplement besoin d'une histoire claire où votre public se reconnaît immédiatement.
+                            </p>
+                        </div>
+                        <a href="#methode" class="text-xs font-mono text-amberLuxe-400 hover:text-white transition-colors flex items-center gap-1.5 whitespace-nowrap">
+                            Découvrir la méthode <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+                        </a>
                     </div>
+
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- SECTION 3 : THE VALUE PROPOSITION -->
-        <section id="methode" class="py-20 px-4 bg-warm-100/50 border-b border-warm-200">
-            <div class="max-w-5xl mx-auto space-y-12">
-                <div class="text-center space-y-3">
-                    <h2 class="text-2xl md:text-3xl font-black text-warm-900">
-                        L'histoire qui fait vendre votre gamme
-                    </h2>
-                    <p class="text-stone-600 max-w-xl mx-auto text-sm">
-                        Chaque vidéo suit une structure narrative précise pour donner envie d'acheter.
+            <!-- SECTION MARQUEE : LOGOS ET MARQUES -->
+            <section class="py-14 border-t border-white/[0.05] relative overflow-hidden bg-obsidian-900/40">
+                <div class="max-w-5xl mx-auto px-4 mb-6 text-center">
+                    <p class="text-[11px] font-mono tracking-widest text-stone-400 uppercase">
+                        ILS FONT ENTENDRE LEUR VOIX ET DÉVELOPPENT LEUR ACTIVITÉ
                     </p>
                 </div>
+                
+                <div class="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+                    <div class="flex gap-16 w-max animate-marquee items-center py-2 text-stone-300 font-mono text-xs tracking-wider uppercase">
+                        
+                        <!-- Bloc 1 -->
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">AURA BOTANICS</span>
+                        </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white border border-warm-200 p-8 rounded-2xl space-y-4 shadow-sm">
-                        <h3 class="font-bold text-xl text-warm-900">1. La frustration</h3>
-                        <p class="text-stone-600 text-sm">
-                            La vidéo commence par le problème quotidien : les cheveux ternes, la casse, le démêlage difficile. Votre cliente s'arrête car on parle de sa réalité.
-                        </p>
-                    </div>
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="aperture" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">NOIR STUDIO</span>
+                        </div>
 
-                    <div class="bg-white border border-warm-200 p-8 rounded-2xl space-y-4 shadow-sm">
-                        <h3 class="font-bold text-xl text-warm-900">2. La solution évidente</h3>
-                        <p class="text-stone-600 text-sm">
-                            Vos produits entrent en scène. Grâce à nos visuels avancés, nous démontrons l'application de vos soins ou de vos outils et leur effet immédiat.
-                        </p>
-                    </div>
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">KAMBIA ATELIER</span>
+                        </div>
 
-                    <div class="bg-white border border-warm-200 p-8 rounded-2xl space-y-4 shadow-sm">
-                        <h3 class="font-bold text-xl text-warm-900">3. La victoire</h3>
-                        <p class="text-stone-600 text-sm">
-                            Une chevelure éclatante et un rituel apaisé. La vidéo se termine par une invitation limpide à cliquer pour commander.
-                        </p>
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="feather" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">SOIE & ÉCRIN</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="activity" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">VORTEX MEDIA</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">STRATA LAB</span>
+                        </div>
+
+                        <!-- Bloc 2 (Duplication) -->
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">AURA BOTANICS</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="aperture" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">NOIR STUDIO</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">KAMBIA ATELIER</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="feather" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">SOIE & ÉCRIN</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="activity" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">VORTEX MEDIA</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 group hover:text-white transition-colors">
+                            <span class="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amberLuxe-400">
+                                <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <span class="font-bold">STRATA LAB</span>
+                        </div>
+
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- SECTION 4 : THE GUIDE -->
-        <section class="py-16 px-4 bg-white border-b border-warm-200">
-            <div class="max-w-4xl mx-auto space-y-4 text-center">
-                <h2 class="text-xl font-bold text-warm-900">Nous savons qu'il est difficile de valoriser d'excellents produits capillaires face aux industriels.</h2>
-                <p class="text-stone-600 text-sm">C'est pourquoi nous mettons notre expertise narrative à votre service pour révéler la vraie valeur de votre marque.</p>
-            </div>
-        </section>
+            <!-- SECTION 3 : THE VALUE PROPOSITION (LA MÉTHODE UNIVERSELLE) -->
+            <section id="methode" class="py-24 px-4 border-t border-white/[0.05] relative">
+                <div class="max-w-5xl mx-auto space-y-16">
+                    
+                    <div class="max-w-2xl space-y-4">
+                        <div class="inline-flex items-center gap-2 text-xs font-mono text-amberLuxe-400 tracking-widest uppercase">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 02 // La Méthode PubNarratives
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                            Comment 45 secondes transforment un inconnu sceptique en client convaincu.
+                        </h2>
+                        <p class="text-stone-400 text-sm sm:text-base leading-relaxed">
+                            Chaque seconde de la vidéo est construite pour lever un doute précis et amener votre audience vers une décision claire :
+                        </p>
+                    </div>
 
-        <!-- SECTION 5 : THE PLAN -->
-        <section id="etapes" class="py-20 px-4 bg-warm-50 border-b border-warm-200">
-            <div class="max-w-5xl mx-auto space-y-12">
-                <div class="text-center space-y-3">
-                    <h2 class="text-2xl md:text-3xl font-black text-warm-900">
-                        Votre vidéo prête en 3 étapes simples
-                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-6 flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between border-b border-white/[0.05] pb-3 font-mono text-xs">
+                                    <span class="text-amberLuxe-400 font-bold">SECONDES 00 À 10</span>
+                                    <span class="text-stone-400">L'Arrêt sur Image</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white tracking-wide">
+                                    L'accroche sur la frustration
+                                </h3>
+                                <p class="text-xs text-stone-400 leading-relaxed">
+                                    La vidéo s'ouvre sur le problème précis qui contrarie votre prospect au quotidien. Il s'arrête net : la vidéo met des mots justes sur sa réalité sans agressivité commerciale.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/[0.05] space-y-1">
+                                <span class="text-[10px] font-mono text-stone-400 uppercase tracking-wider block">Ce qui se passe</span>
+                                <span class="text-xs text-stone-200 font-medium">Le scroll s'arrête net, l'attention est totale</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-6 flex flex-col justify-between border-amberLuxe-500/20">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between border-b border-white/[0.05] pb-3 font-mono text-xs">
+                                    <span class="text-amberLuxe-400 font-bold">SECONDES 10 À 30</span>
+                                    <span class="text-stone-400">La Solution</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white tracking-wide">
+                                    Votre offre en solution évidente
+                                </h3>
+                                <p class="text-xs text-stone-400 leading-relaxed">
+                                    Votre produit, service ou initiative entre en scène au moment parfait. La mise en scène visuelle et dynamique prouve concrètement comment votre solution élimine le problème.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/[0.05] space-y-1">
+                                <span class="text-[10px] font-mono text-stone-400 uppercase tracking-wider block">Ce qui se passe</span>
+                                <span class="text-xs text-stone-200 font-medium">Les doutes tombent, la valeur est démontrée</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-6 flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between border-b border-white/[0.05] pb-3 font-mono text-xs">
+                                    <span class="text-amberLuxe-400 font-bold">SECONDES 30 À 45</span>
+                                    <span class="text-stone-400">Le Passage à l'Action</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white tracking-wide">
+                                    La victoire et l'appel direct
+                                </h3>
+                                <p class="text-xs text-stone-400 leading-relaxed">
+                                    Le spot illustre le soulagement, le gain de temps ou le résultat obtenu. Il se conclut sur une consigne d'action limpide vers votre page, votre boutique ou votre formulaire.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/[0.05] space-y-1">
+                                <span class="text-[10px] font-mono text-stone-400 uppercase tracking-wider block">Ce qui se passe</span>
+                                <span class="text-xs text-stone-200 font-medium">L'hésitation disparaît, l'action est déclenchée</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Empathie & Autorité (La posture du Guide) -->
+                    <div class="glass-panel rounded-3xl p-8 sm:p-10 space-y-6 border border-white/10">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                            <div class="space-y-1">
+                                <span class="text-[11px] font-mono uppercase tracking-widest text-amberLuxe-400 font-bold">Notre Rôle</span>
+                                <h3 class="text-lg font-bold text-white">Vous avez mis votre énergie à bâtir une offre utile. Nous veillons à ce qu'elle trouve son public.</h3>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs font-mono text-stone-400">
+                                <span class="w-2 h-2 rounded-full bg-amberLuxe-400"></span>
+                                ATELIER CRÉATIF DÉDIÉ
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">
+                            Développer une entreprise, lancer un produit ou porter une cause demande un engagement immense. Nous pensons qu'aucun projet de valeur ne devrait rester invisible faute d'un budget de production cinéma à 5 000 €. Notre mission est de vous donner la force de frappe des meilleures campagnes : percutantes, abordables et prêtes en 48 heures.
+                        </p>
+                    </div>
+
                 </div>
+            </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white border border-warm-200 p-6 rounded-2xl space-y-4 shadow-sm">
-                        <div class="w-8 h-8 rounded-full bg-amberAccent-500 text-white font-bold flex items-center justify-center text-sm">1</div>
-                        <h3 class="font-bold text-lg text-warm-900">Partagez votre lien</h3>
-                        <p class="text-stone-600 text-sm">
-                            Collez l'URL de votre produit lors de la commande. Nous récupérons les photos et les détails de votre soin ou accessoire pour vous faire gagner du temps.
+            <!-- SECTION 4 : LA DÉMONSTRATION / LECTEUR HORIZONTAL 16:9 -->
+            <section id="demo" class="py-24 px-4 border-t border-white/[0.05] relative">
+                <div class="max-w-5xl mx-auto space-y-12">
+                    
+                    <div class="max-w-2xl space-y-4">
+                        <div class="inline-flex items-center gap-2 text-xs font-mono text-amberLuxe-400 tracking-widest uppercase">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 03 // Démonstration Visuelle
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                            L'anatomie d'une vidéo courte qui fait passer à l'action.
+                        </h2>
+                        <p class="text-stone-400 text-sm sm:text-base leading-relaxed">
+                            Voyez comment chaque séquence désamorce une hésitation et transforme la simple curiosité en engagement concret.
                         </p>
                     </div>
 
-                    <div class="bg-white border border-warm-200 p-6 rounded-2xl space-y-4 shadow-sm">
-                        <div class="w-8 h-8 rounded-full bg-amberAccent-500 text-white font-bold flex items-center justify-center text-sm">2</div>
-                        <h3 class="font-bold text-lg text-warm-900">Scénarisation et Montage</h3>
-                        <p class="text-stone-600 text-sm">
-                            Nous rédigeons l'histoire, créons le rendu visuel dynamique de votre produit et livrons une vidéo avec voix off sous 48h.
+                    <!-- Cadre Cinématique Horizontal 16:9 -->
+                    <div class="glass-panel p-3 sm:p-4 rounded-[2rem] border border-white/10 shadow-2xl relative overflow-hidden group">
+                        
+                        <div class="flex items-center justify-between px-4 py-2 border-b border-white/[0.05] text-[11px] font-mono text-stone-400 mb-3">
+                            <span class="flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-amberLuxe-400 animate-pulse"></span>
+                                AUTOPSIE NARRATIVE // STUDIO PUBNARRATIVES
+                            </span>
+                            <span class="hidden sm:inline-block">DÉMONSTRATION D'UN SCRIPT QUI DÉCLENCHE L'ACTION</span>
+                            <span class="text-amberLuxe-400 font-bold">45 SECONDES CHRONO</span>
+                        </div>
+
+                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-obsidian-900 border border-white/5 flex items-center justify-center">
+                            <video 
+                                id="demo-video"
+                                src="videos/demo.mp4" 
+                                controls 
+                                playsinline 
+                                preload="metadata"
+                                class="w-full h-full object-cover">
+                                Votre navigateur ne supporte pas la lecture de vidéos.
+                            </video>
+                        </div>
+
+                        <div class="pt-4 px-2 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-1">
+                                <div class="flex items-center justify-between text-[10px] font-mono text-amberLuxe-400">
+                                    <span>ÉTAPE 1</span>
+                                    <span>00:00 - 00:10</span>
+                                </div>
+                                <p class="text-xs text-white font-medium">La Tension Initiale</p>
+                                <p class="text-[11px] text-stone-400 leading-tight">Formuler le point de friction pour créer une identification immédiate.</p>
+                            </div>
+
+                            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-1">
+                                <div class="flex items-center justify-between text-[10px] font-mono text-amberLuxe-400">
+                                    <span>ÉTAPE 2</span>
+                                    <span>00:10 - 00:30</span>
+                                </div>
+                                <p class="text-xs text-white font-medium">La Preuve en Mouvement</p>
+                                <p class="text-[11px] text-stone-400 leading-tight">Démontrer l'efficacité de la solution pour effacer le doute.</p>
+                            </div>
+
+                            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-1">
+                                <div class="flex items-center justify-between text-[10px] font-mono text-amberLuxe-400">
+                                    <span>ÉTAPE 3</span>
+                                    <span>00:30 - 00:45</span>
+                                </div>
+                                <p class="text-xs text-white font-medium">La Résolution & L'Action</p>
+                                <p class="text-[11px] text-stone-400 leading-tight">Célébrer la victoire finale et donner une consigne d'action directe.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION 5 : THE PLAN (ZÉRO PRISE DE TÊTE) -->
+            <section id="etapes" class="py-24 px-4 border-t border-white/[0.05] relative">
+                <div class="max-w-5xl mx-auto space-y-16">
+                    
+                    <div class="max-w-2xl space-y-4">
+                        <div class="inline-flex items-center gap-2 text-xs font-mono text-amberLuxe-400 tracking-widest uppercase">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 04 // Zéro Prise de Tête
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                            Votre vidéo prête à publier en 3 étapes simples.
+                        </h2>
+                        <p class="text-stone-400 text-sm sm:text-base leading-relaxed">
+                            Pas de formulaires interminables ni de réunions superflues : vous restez concentré sur votre activité.
                         </p>
                     </div>
 
-                    <div class="bg-white border border-warm-200 p-6 rounded-2xl space-y-4 shadow-sm">
-                        <div class="w-8 h-8 rounded-full bg-amberAccent-500 text-white font-bold flex items-center justify-center text-sm">3</div>
-                        <h3 class="font-bold text-lg text-warm-900">Diffusez et Vendez</h3>
-                        <p class="text-stone-600 text-sm">
-                            Publiez la vidéo sur vos canaux de vente (TikTok, Instagram, WhatsApp, Ads) et encaissez les commandes sur votre boutique.
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-6 flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="w-10 h-10 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center text-white font-mono text-sm font-bold">
+                                    1
+                                </div>
+                                <h3 class="text-lg font-bold text-white tracking-wide">
+                                    Transmettez votre lien ou votre idée
+                                </h3>
+                                <p class="text-xs text-stone-400 leading-relaxed">
+                                    Collez simplement l'adresse de votre page, votre fiche produit ou décrivez votre offre en quelques lignes. Nous extrayons nous-mêmes les angles clés.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/[0.05] text-[11px] font-mono text-stone-400">
+                                Moins de 2 minutes pour démarrer
+                            </div>
+                        </div>
+
+                        <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-6 flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="w-10 h-10 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center text-white font-mono text-sm font-bold">
+                                    2
+                                </div>
+                                <h3 class="text-lg font-bold text-white tracking-wide">
+                                    Scénarisation et rendu sous 48h
+                                </h3>
+                                <p class="text-xs text-stone-400 leading-relaxed">
+                                    Nous rédigeons le script percutant, générons des séquences cinématiques sur mesure et enregistrons la voix off avec un habillage sonore professionnel.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/[0.05] text-[11px] font-mono text-stone-400">
+                                Tout est livré sous 48h chrono
+                            </div>
+                        </div>
+
+                        <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-6 flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="w-10 h-10 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center text-white font-mono text-sm font-bold">
+                                    3
+                                </div>
+                                <h3 class="text-lg font-bold text-white tracking-wide">
+                                    Diffusez et récoltez les résultats
+                                </h3>
+                                <p class="text-xs text-stone-400 leading-relaxed">
+                                    Téléchargez votre vidéo HD en format vertical (9:16). Publiez-la sur vos réseaux (Reels, TikTok, Shorts) ou lancez vos campagnes publicitaires pour convertir votre trafic.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/[0.05] text-[11px] font-mono text-stone-400">
+                                Prêt pour l'acquisition
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION 6 : THE PRICE CHOICES / GRILLE TARIFAIRE -->
+            <section id="tarifs" class="py-24 px-4 border-t border-white/[0.05] relative">
+                <div class="max-w-5xl mx-auto space-y-16">
+                    
+                    <div class="max-w-2xl space-y-4">
+                        <div class="inline-flex items-center gap-2 text-xs font-mono text-amberLuxe-400 tracking-widest uppercase">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 05 // Un Choix Sans Risque
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                            Un investissement rentabilisé dès vos premiers clients.
+                        </h2>
+                        <p class="text-stone-400 text-sm sm:text-base leading-relaxed">
+                            Une ou deux commandes supplémentaires déclenchées par une communication percutante suffisent à couvrir l'intégralité de votre dépense.
                         </p>
                     </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+                        
+                        <!-- Formule 1 : Flash-Test -->
+                        <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-8 flex flex-col justify-between">
+                            <div class="space-y-5">
+                                <div class="flex items-center justify-between font-mono text-xs text-stone-400">
+                                    <span class="uppercase">Pour Démarrer</span>
+                                    <span>1 Offre Clé</span>
+                                </div>
+                                <h3 class="text-2xl font-black text-white">Flash-Test</h3>
+                                <div>
+                                    <span class="text-5xl font-black text-white">30</span>
+                                    <span class="text-xl text-stone-400 font-bold">€</span>
+                                </div>
+                                <p class="text-xs text-stone-400 leading-relaxed">
+                                    Pour tester l'impact d'une vidéo narrative sur votre offre ou message cible.
+                                </p>
+                                <ul class="space-y-3 text-xs text-stone-300 pt-4 border-t border-white/[0.05]">
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> 1 Vidéo publicitaire complète (45 secondes)</li>
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> Format vertical 9:16 natif (Reels/TikTok/Ads)</li>
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> Scénario concentré sur le problème principal</li>
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> Voix off naturelle et sound design soigné</li>
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> Livraison garantie sous 48h chrono</li>
+                                </ul>
+                            </div>
+                            <div class="space-y-2 pt-4">
+                                <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="w-full block bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-white font-bold py-3.5 rounded-2xl text-xs uppercase tracking-wider text-center transition-all">
+                                    Tester pour 30 €
+                                </a>
+                                <p class="text-[10px] font-mono text-center text-stone-500">Paiement protégé sous séquestre ComeUp</p>
+                            </div>
+                        </div>
+
+                        <!-- Formule 2 : Pack Lancement -->
+                        <div class="glass-panel p-8 rounded-3xl space-y-8 flex flex-col justify-between border-2 border-amberLuxe-500/80 relative glow-featured">
+                            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-amberLuxe-500 text-obsidian-950 font-mono font-bold text-[10px] px-4 py-1 rounded-full uppercase tracking-widest shadow-lg">
+                                Recommandé • Économisez 15 €
+                            </div>
+                            <div class="space-y-5 pt-2">
+                                <div class="flex items-center justify-between font-mono text-xs text-amberLuxe-400 font-bold">
+                                    <span class="uppercase">Pack Lancement</span>
+                                    <span>3 Vidéos Complètes</span>
+                                </div>
+                                <h3 class="text-2xl font-black text-white">Pack Lancement</h3>
+                                <div>
+                                    <span class="text-5xl font-black text-white">75</span>
+                                    <span class="text-xl text-stone-400 font-bold">€</span>
+                                    <span class="text-xs font-mono text-stone-400 block mt-1">(Soit 25 € la vidéo au lieu de 30 €)</span>
+                                </div>
+                                <p class="text-xs text-stone-300 leading-relaxed">
+                                    Pour tester 3 angles d'attaque ou 3 aspects différents de votre gamme ou service.
+                                </p>
+                                <ul class="space-y-3 text-xs text-stone-200 pt-4 border-t border-white/[0.05]">
+                                    <li class="flex items-center gap-2.5 font-bold"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> 3 Vidéos publicitaires distinctes (45s chacune)</li>
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> 3 Accroches différentes pour tester ce qui résonne le plus</li>
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> Sous-titres dynamiques inclus pour le visionnage sans son</li>
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> Sound design immersif et retouches offertes</li>
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> Livraison complète sous 72h ouvrées</li>
+                                </ul>
+                            </div>
+                            <div class="space-y-2 pt-4">
+                                <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="w-full block bg-amberLuxe-500 hover:bg-amberLuxe-400 text-obsidian-950 font-black py-4 rounded-2xl text-xs uppercase tracking-wider text-center transition-all transform active:scale-95 shadow-lg shadow-amberLuxe-500/20">
+                                    Commander les 3 vidéos (75 €)
+                                </a>
+                                <p class="text-[10px] font-mono text-center text-stone-400">Fonds bloqués jusqu'à validation</p>
+                            </div>
+                        </div>
+
+                        <!-- Formule 3 : Trafic Continu -->
+                        <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-8 flex flex-col justify-between">
+                            <div class="space-y-5">
+                                <div class="flex items-center justify-between font-mono text-xs text-stone-400">
+                                    <span class="uppercase">Alimentation Continue</span>
+                                    <span>10 Vidéos / Mois</span>
+                                </div>
+                                <h3 class="text-2xl font-black text-white">Trafic Continu</h3>
+                                <div>
+                                    <span class="text-5xl font-black text-white">220</span>
+                                    <span class="text-xl text-stone-400 font-bold">€ / mois</span>
+                                </div>
+                                <p class="text-xs text-stone-400 leading-relaxed">
+                                    Pour alimenter vos canaux en continu sans être à court de contenu convaincant.
+                                </p>
+                                <ul class="space-y-3 text-xs text-stone-300 pt-4 border-t border-white/[0.05]">
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> 10 Vidéos réparties sur le mois entier</li>
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> Formats verticaux 9:16 et carrés 1:1 inclus</li>
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> Traitement méthodique de toutes les hésitations de vos prospects</li>
+                                    <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-amberLuxe-400"></i> Assistance prioritaire VIP sous 24-48h</li>
+                                </ul>
+                            </div>
+                            <div class="space-y-2 pt-4">
+                                <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="w-full block bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-white font-bold py-3.5 rounded-2xl text-xs uppercase tracking-wider text-center transition-all">
+                                    Démarrer l'abonnement (220 €)
+                                </a>
+                                <p class="text-[10px] font-mono text-center text-stone-500">Sans engagement de durée</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION 7 : LE PARAGRAPHE EXPLICATIF ET LA FAQ -->
+            <section id="faq" class="py-24 px-4 border-t border-white/[0.05] relative">
+                <div class="max-w-4xl mx-auto space-y-16">
+                    
+                    <div class="glass-panel p-8 sm:p-12 rounded-3xl space-y-6 border border-white/10">
+                        <div class="inline-flex items-center gap-2 text-xs font-mono text-amberLuxe-400 tracking-widest uppercase">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 06 // Pourquoi la clarté gagne toujours
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                            Vos clients n'achètent pas ce qui est le plus complexe. Ils choisissent ce qu'ils comprennent le plus vite.
+                        </h2>
+                        <div class="space-y-4 text-xs sm:text-sm text-stone-300 leading-relaxed font-normal">
+                            <p>
+                                En tant qu'entrepreneur, créateur ou dirigeant, vous portez tout sur vos épaules : le développement de votre offre, les opérations, le service client. Vous savez que votre travail apporte une vraie valeur, mais essayer de crier plus fort que les autres sur Internet ne fonctionne plus.
+                            </p>
+                            <p>
+                                Ce qui fonctionne, c'est d'expliquer avec calme et précision à quel point le quotidien de votre prospect sera plus simple, plus fluide ou plus gratifiant après avoir choisi votre solution. Dès que vous supprimez le doute dans son esprit, passer à l'action devient le geste le plus naturel du monde.
+                            </p>
+                            <p>
+                                Chez <strong class="text-white">PubNarratives</strong>, nous mettons notre savoir-faire au service de votre indépendance et de votre croissance. Choisissez votre formule aujourd'hui pour offrir à votre projet la vitrine vivante qu'il mérite.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="text-center space-y-2">
+                            <h3 class="text-2xl font-extrabold text-white tracking-tight">Questions Fréquentes</h3>
+                            <p class="text-xs font-mono text-stone-400">Tout ce que vous devez savoir avant de passer commande</p>
+                        </div>
+
+                        <div class="space-y-3">
+                            <details class="glass-panel rounded-2xl group border border-white/[0.06] overflow-hidden">
+                                <summary class="p-6 cursor-pointer flex items-center justify-between text-sm font-bold text-white group-hover:text-amberLuxe-400 transition-colors select-none">
+                                    <span>Quels types d'offres ou de projets pouvez-vous mettre en scène ?</span>
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-stone-400 group-open:rotate-180 transition-transform"></i>
+                                </summary>
+                                <div class="px-6 pb-6 text-xs text-stone-400 leading-relaxed border-t border-white/[0.04] pt-4">
+                                    Produits physiques (e-commerce, artisanat, accessoires, cosmétique), solutions logicielles et outils digitaux, prestations de services ou campagnes de sensibilisation associative et citoyenne. Dès lors qu'une proposition répond à une frustration réelle, la structure narrative opère avec la même efficacité.
+                                </div>
+                            </details>
+
+                            <details class="glass-panel rounded-2xl group border border-white/[0.06] overflow-hidden">
+                                <summary class="p-6 cursor-pointer flex items-center justify-between text-sm font-bold text-white group-hover:text-amberLuxe-400 transition-colors select-none">
+                                    <span>Comment se passe la production sans tournage physique ?</span>
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-stone-400 group-open:rotate-180 transition-transform"></i>
+                                </summary>
+                                <div class="px-6 pb-6 text-xs text-stone-400 leading-relaxed border-t border-white/[0.04] pt-4">
+                                    L'URL de votre page, des photos nettes de votre produit ou quelques captures de votre solution suffisent. Nos outils de mise en scène visuelle et d'animation cinématique recréent le mouvement, l'interaction et l'univers graphique adapté sans que vous ayez besoin de mobiliser une équipe de tournage.
+                                </div>
+                            </details>
+
+                            <details class="glass-panel rounded-2xl group border border-white/[0.06] overflow-hidden">
+                                <summary class="p-6 cursor-pointer flex items-center justify-between text-sm font-bold text-white group-hover:text-amberLuxe-400 transition-colors select-none">
+                                    <span>Quels formats de vidéo vais-je recevoir ?</span>
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-stone-400 group-open:rotate-180 transition-transform"></i>
+                                </summary>
+                                <div class="px-6 pb-6 text-xs text-stone-400 leading-relaxed border-t border-white/[0.04] pt-4">
+                                    Vous recevez votre vidéo en haute définition au format vertical 9:16 (1080x1920), taillé pour les Reels Instagram, TikTok, Shorts YouTube et campagnes Meta Ads. Le Pack Lancement et le Forfait Mensuel permettent également de demander des déclinaisons carrées 1:1.
+                                </div>
+                            </details>
+
+                            <details class="glass-panel rounded-2xl group border border-white/[0.06] overflow-hidden">
+                                <summary class="p-6 cursor-pointer flex items-center justify-between text-sm font-bold text-white group-hover:text-amberLuxe-400 transition-colors select-none">
+                                    <span>Comment fonctionne la garantie de paiement sur ComeUp ?</span>
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-stone-400 group-open:rotate-180 transition-transform"></i>
+                                </summary>
+                                <div class="px-6 pb-6 text-xs text-stone-400 leading-relaxed border-t border-white/[0.04] pt-4">
+                                    Votre paiement est consigné sous séquestre par la plateforme ComeUp (société française certifiée). Nous ne touchons vos fonds qu'au moment où vous téléchargez la vidéo livrée et confirmez que le travail correspond à vos attentes. Vous ne prenez aucun risque financier.
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER STATUTAIRE -->
+        <footer class="border-t border-white/[0.05] py-12 px-4 bg-obsidian-950 text-stone-400 font-mono text-xs">
+            <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <img src="images/logo-pubnarratives.jpg" alt="Logo" class="w-6 h-6 object-contain filter invert mix-blend-screen opacity-60">
+                    <p>© 2026 PUBNARRATIVES. TOUS DROITS RÉSERVÉS.</p>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="https://www.instagram.com/pubnarratives?stkn=eHE4c3kyZHJxbHZ2" target="_blank" class="hover:text-stone-200 transition-colors flex items-center gap-1.5">
+                        <i data-lucide="instagram" class="w-3.5 h-3.5"></i> INSTAGRAM
+                    </a>
+                    <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="hover:text-stone-200 transition-colors flex items-center gap-1.5">
+                        <i data-lucide="shield" class="w-3.5 h-3.5"></i> COMEUP OFFICIEL
+                    </a>
                 </div>
             </div>
-        </section>
+        </footer>
 
-        <!-- SECTION 6 : THE EXPLANATORY PARAGRAPH -->
-        <section id="faq" class="py-20 px-4 bg-white border-b border-warm-200">
-            <div class="max-w-3xl mx-auto space-y-6 text-center">
-                <h2 class="text-2xl font-black text-warm-900">Ne laissez plus votre gamme prendre la poussière numérique.</h2>
-                <p class="text-stone-600 text-base leading-relaxed">
-                    Chez PubNarratives, nous croyons qu'aucune marque de soins capillaires ne devrait voir ses ventes stagner à cause de visuels amateurs. Vos clientes ont besoin d'être rassurées avant d'acheter. En utilisant des scénarios qui parlent de leurs douleurs quotidiennes, nous faisons de vos produits la seule solution logique. Choisissez votre pack aujourd'hui, et offrez à votre marque la mise en scène qu'elle mérite.
+    </div>
+
+    <!-- MODAL DU LEAD GENERATOR -->
+    <div id="lead-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass-panel p-8 sm:p-10 rounded-[2.5rem] border border-white/10 max-w-lg w-full relative shadow-2xl space-y-6 transform scale-95 transition-all duration-300" id="lead-modal-content">
+            
+            <button onclick="closeLeadModal()" class="absolute top-6 right-6 text-stone-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/[0.05]">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="space-y-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amberLuxe-500/10 border border-amberLuxe-500/20 text-[10px] font-mono tracking-widest text-amberLuxe-400 uppercase">
+                    Guide Pratique Offert
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+                    Les 5 erreurs de communication qui font fuir vos prospects
+                </h3>
+                <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">
+                    Le guide de 6 pages pour transformer l'attention en décision sans budget de tournage exorbitant.
                 </p>
             </div>
-        </section>
 
-        <!-- SECTION 7 : THE VIDEO -->
-        <section id="demo" class="py-20 px-4 bg-warm-100/50 border-b border-warm-200">
-            <div class="max-w-3xl mx-auto space-y-8 text-center">
-                <div class="space-y-3">
-                    <h2 class="text-2xl font-black text-warm-900">
-                        Voyez le résultat par vous-même
-                    </h2>
-                    <p class="text-stone-600 text-sm">Le contraste entre une image fixe et une vidéo qui raconte une histoire.</p>
-                </div>
-
-                <!-- Mockup Smartphone 9:16 -->
-                <div class="relative w-full max-w-[280px] sm:max-w-[300px] aspect-[9/16] mx-auto bg-stone-900 rounded-[2.5rem] p-3 border-4 border-stone-800 shadow-xl glow-phone">
-                    <div class="absolute top-6 left-1/2 -translate-x-1/2 w-20 h-4 bg-stone-800 rounded-full z-20 pointer-events-none"></div>
-
-                    <div class="relative w-full h-full rounded-[2rem] overflow-hidden bg-black flex items-center justify-center">
-                        <video 
-                            src="videos/demo.mp4" 
-                            controls 
-                            playsinline 
-                            class="w-full h-full object-cover rounded-[2rem]">
-                        </video>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 8 : PRICE CHOICES -->
-        <section id="tarifs" class="py-20 px-4 bg-white border-b border-warm-200">
-            <div class="max-w-5xl mx-auto space-y-12">
-                <div class="text-center space-y-3">
-                    <h2 class="text-2xl md:text-3xl font-black text-warm-900">
-                        Rentable dès votre première vente
-                    </h2>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-                    
-                    <!-- Palier 1 -->
-                    <div class="bg-warm-50 border border-warm-200 p-8 rounded-3xl space-y-6 flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <p class="text-xs font-bold text-stone-500 uppercase tracking-widest">Flash-Test</p>
-                            <div>
-                                <span class="text-4xl font-black text-warm-900">30</span>
-                                <span class="text-stone-500 font-bold">€</span>
-                            </div>
-                            <ul class="space-y-3 text-sm text-stone-700">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> 1 vidéo (45-60s)</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Format vertical 9:16</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Scénario persuasif</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Livraison sous 48h</li>
-                            </ul>
-                        </div>
-                        <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="w-full block bg-white border border-warm-300 hover:bg-warm-100 text-warm-900 font-bold py-3 rounded-xl text-sm text-center transition-colors">
-                            Commander (30 €)
-                        </a>
-                    </div>
-
-                    <!-- Palier 2 -->
-                    <div class="bg-white border-2 border-amberAccent-500 p-8 rounded-3xl space-y-6 flex flex-col justify-between relative shadow-lg glow-amber">
-                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amberAccent-500 text-white font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
-                            Recommandé
-                        </div>
-                        <div class="space-y-4 pt-2">
-                            <p class="text-xs font-bold text-amberAccent-600 uppercase tracking-widest">Pack Lancement</p>
-                            <div>
-                                <span class="text-5xl font-black text-warm-900">75</span>
-                                <span class="text-stone-500 font-bold">€</span>
-                            </div>
-                            <ul class="space-y-3 text-sm text-stone-700">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> <strong>3 vidéos distinctes</strong></li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Idéal pour tester 3 angles</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Sous-titres inclus</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Livraison sous 72h</li>
-                            </ul>
-                        </div>
-                        <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="w-full block bg-amberAccent-500 hover:bg-amberAccent-600 text-white font-bold py-3.5 rounded-xl text-sm text-center transition-colors">
-                            Commander (75 €)
-                        </a>
-                    </div>
-
-                    <!-- Palier 3 -->
-                    <div class="bg-warm-50 border border-warm-200 p-8 rounded-3xl space-y-6 flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <p class="text-xs font-bold text-stone-500 uppercase tracking-widest">Trafic Continu</p>
-                            <div>
-                                <span class="text-4xl font-black text-warm-900">220</span>
-                                <span class="text-stone-500 font-bold">€ / mois</span>
-                            </div>
-                            <ul class="space-y-3 text-sm text-stone-700">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> 10 vidéos par mois</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Formats multiples</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amberAccent-500"></i> Priorité VIP</li>
-                            </ul>
-                        </div>
-                        <a href="https://comeup.com/fr/service/546732/creer-votre-video-publicitaire-narrative-pour-vos-produits-de-soins-capillaires" target="_blank" class="w-full block bg-white border border-warm-300 hover:bg-warm-100 text-warm-900 font-bold py-3 rounded-xl text-sm text-center transition-colors">
-                            S'abonner (220 €)
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- SECTION 9 : JUNK DRAWER (FOOTER) -->
-    <footer class="py-8 px-4 bg-warm-900 text-stone-400 text-xs text-center">
-        <div class="flex justify-center mb-4">
-            <img src="images/logo-pubnarratives.jpg" alt="Logo PubNarratives" class="h-6 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mix-blend-screen">
-        </div>
-        <p class="font-bold text-white mb-2 tracking-widest">PUBNARRATIVES</p>
-        <p>© 2026 Tous droits réservés. Paiements sécurisés via ComeUp.fr.</p>
-        <div class="mt-4 flex justify-center items-center gap-4">
-            <a href="#" class="hover:text-white transition-colors">Mentions légales</a>
-            <span>|</span>
-            <a href="https://www.instagram.com/pubnarratives?stkn=eHE4c3kyZHJxbHZ2" target="_blank" class="flex items-center gap-1 hover:text-white transition-colors">
-                <i data-lucide="instagram" class="w-3.5 h-3.5"></i> Rejoignez-nous sur Instagram
-            </a>
-        </div>
-    </footer>
-
-    <!-- ======================================================== -->
-    <!-- MODAL POP-UP : LEAD GENERATOR (DONALD MILLER BLUEPRINT) -->
-    <!-- ======================================================== -->
-    <div id="lead-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-warm-900/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-        
-        <div class="relative w-full max-w-xl bg-warm-50 border border-warm-200 rounded-3xl shadow-2xl p-6 sm:p-8 transform scale-95 transition-transform duration-300 overflow-hidden" id="modal-container">
-            
-            <!-- En-tête Badge -->
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amberAccent-500/30 text-amberAccent-700 text-xs font-bold uppercase tracking-wider mb-4">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amberAccent-500"></i> Guide Stratégique Gratuit
-            </div>
-
-            <!-- Titre Impactant (Grunt Test) -->
-            <h3 class="text-2xl sm:text-3xl font-black text-warm-900 leading-tight mb-2">
-                05 Erreurs Visuelles qui bloquent vos ventes de soins capillaires
-            </h3>
-            <p class="text-stone-600 text-sm leading-relaxed mb-6">
-                Découvrez pourquoi vos photos passent inaperçues sur Instagram et comment doubler vos commandes dès cette semaine sans dépenser un euro en studio photo.
-            </p>
-
-            <!-- Formulaire Web3Forms avec votre clé d'accès -->
             <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
-                <input type="hidden" name="access_key" value="82abc08e-6c5e-4c5b-8384-d4846a007c3a" />
-                <input type="hidden" name="subject" value="Nouveau prospect PubNarratives - Guide Gratuit" />
-                <input type="hidden" name="from_name" value="PubNarratives Lead Generator" />
+                <input type="hidden" name="access_key" value="82abc08e-6c5e-4c5b-8384-d4846a007c3a">
+                <input type="hidden" name="subject" value="Nouveau prospect - Guide Gratuit PubNarratives">
+                <input type="hidden" name="from_name" value="PubNarratives Lead">
                 
                 <div>
-                    <label for="lead-name" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">Votre Prénom ou Nom de Marque</label>
-                    <input type="text" id="lead-name" name="name" required placeholder="Ex : Sarah (Atelier Kambia)" class="w-full px-4 py-3 bg-white border border-warm-300 rounded-xl text-warm-900 placeholder:text-stone-400 focus:outline-none focus:border-amberAccent-500 focus:ring-2 focus:ring-amberAccent-500/20 text-sm font-medium transition-all" />
+                    <label class="block text-[11px] font-mono uppercase tracking-wider text-stone-400 mb-1.5">Votre Prénom ou Nom de Marque / Projet</label>
+                    <input type="text" name="name" required placeholder="Ex: Sarah ou Studio Alpha" class="w-full px-4 py-3 rounded-xl bg-obsidian-900 border border-white/10 text-white placeholder-stone-600 text-xs focus:outline-none focus:border-amberLuxe-500 transition-colors">
                 </div>
 
                 <div>
-                    <label for="lead-email" class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1">Votre Adresse Email Professionnelle</label>
-                    <input type="email" id="lead-email" name="email" required placeholder="contact@votre-boutique.com" class="w-full px-4 py-3 bg-white border border-warm-300 rounded-xl text-warm-900 placeholder:text-stone-400 focus:outline-none focus:border-amberAccent-500 focus:ring-2 focus:ring-amberAccent-500/20 text-sm font-medium transition-all" />
+                    <label class="block text-[11px] font-mono uppercase tracking-wider text-stone-400 mb-1.5">Votre Adresse Email Professionnelle</label>
+                    <input type="email" name="email" required placeholder="contact@votre-projet.com" class="w-full px-4 py-3 rounded-xl bg-obsidian-900 border border-white/10 text-white placeholder-stone-600 text-xs focus:outline-none focus:border-amberLuxe-500 transition-colors">
                 </div>
 
-                <!-- Bouton d'Action Massif -->
-                <button type="submit" class="w-full bg-amberAccent-500 hover:bg-amberAccent-600 text-white font-extrabold py-3.5 px-6 rounded-xl text-base shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
-                    <i data-lucide="download" class="w-4 h-4"></i> Recevoir mon exemplaire gratuit (PDF)
+                <button type="submit" class="w-full bg-amberLuxe-500 hover:bg-amberLuxe-400 text-obsidian-950 font-black py-4 rounded-xl text-xs uppercase tracking-wider transition-all transform active:scale-95 shadow-lg shadow-amberLuxe-500/20 flex items-center justify-center gap-2">
+                    Recevoir mon exemplaire gratuit (PDF) <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </button>
             </form>
 
-            <!-- Éléments de réassurance -->
-            <div class="mt-4 flex items-center justify-center gap-4 text-[11px] text-stone-500">
-                <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-amberAccent-500"></i> Garanti 0 spam</span>
-                <span>•</span>
-                <span>Lecture rapide en 5 minutes</span>
-            </div>
-
-            <!-- Refus Psychologique (Donald Miller Rule) -->
-            <div class="text-center mt-5 pt-3 border-t border-warm-200">
-                <button type="button" onclick="closeLeadModal()" class="text-xs text-stone-400 hover:text-stone-600 underline transition-colors">
-                    Non merci, je préfère continuer à poster de simples photos
+            <div class="text-center pt-2">
+                <button onclick="closeLeadModal()" class="text-[11px] font-mono text-stone-400 hover:text-stone-300 transition-colors">
+                    Non merci, je préfère laisser mes concurrents capter l'attention
                 </button>
             </div>
 
         </div>
     </div>
 
-    <!-- SCRIPTS : LUCIDE & GESTION DU LEAD GENERATOR -->
+    <!-- MOTEUR WEBGL THREE.JS (RÉPLICATION EXACTE DU SPRINT 1 : FLUIDE, GÉOMÉTRIQUE & INERTIEL) -->
     <script>
-        lucide.createIcons();
+        const canvas = document.getElementById('webgl-canvas');
+        const scene = new THREE.Scene();
+        
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
 
-        let modalShown = false;
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Grille de 1 200 particules géométriques dorées du Sprint 1
+        const count = 1200;
+        const positions = new Float32Array(count * 3);
+
+        for (let i = 0; i < count * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 80;
+            positions[i + 1] = (Math.random() - 0.5) * 80;
+            positions[i + 2] = (Math.random() - 0.5) * 50;
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        // Particules ambre subtiles du Sprint 1 (taille 0.35, opacité 0.35)
+        const material = new THREE.PointsMaterial({
+            size: 0.35,
+            color: 0xD97706,
+            transparent: true,
+            opacity: 0.35,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // Suivi fluide du curseur avec inertie
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) * 0.02;
+            mouseY = (e.clientY - window.innerHeight / 2) * 0.02;
+        });
+
+        // Redimensionnement réactif
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Boucle d'animation continue (60 FPS constants)
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+
+            targetX += (mouseX - targetX) * 0.05;
+            targetY += (mouseY - targetY) * 0.05;
+
+            particles.rotation.y = elapsedTime * 0.03 + targetX * 0.2;
+            particles.rotation.x = targetY * 0.2;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Modal Lead Generator
         const modal = document.getElementById('lead-modal');
-        const container = document.getElementById('modal-container');
+        const modalContent = document.getElementById('lead-modal-content');
 
         function openLeadModal() {
+            if (!modal) return;
             modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.classList.add('opacity-100', 'pointer-events-auto');
-            container.classList.remove('scale-95');
-            container.classList.add('scale-100');
-            lucide.createIcons();
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
         }
 
         function closeLeadModal() {
+            if (!modal) return;
             modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.classList.remove('opacity-100', 'pointer-events-auto');
-            container.classList.remove('scale-95');
-            container.classList.add('scale-100');
-            sessionStorage.setItem('lead_modal_dismissed', 'true');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            sessionStorage.setItem('pubnarratives_lead_seen', 'true');
         }
 
-        // Fermeture si clic en dehors du cadre
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeLeadModal();
-            }
-        });
-
-        // Déclencheurs automatiques si l'utilisateur ne l'a pas déjà fermé
-        if (!sessionStorage.getItem('lead_modal_dismissed')) {
-            // 1. Déclencheur temporisé : 10 secondes (Donald Miller recommendation)
-            setTimeout(() => {
-                if (!modalShown) {
-                    modalShown = true;
-                    openLeadModal();
-                }
-            }, 10000);
-
-            // 2. Déclencheur Exit-Intent (quand le curseur quitte la page par le haut)
-            document.addEventListener('mouseleave', function(e) {
-                if (e.clientY <= 0 && !modalShown) {
-                    modalShown = true;
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeLeadModal();
+            });
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeLeadModal();
+            });
+            document.addEventListener('mouseleave', (e) => {
+                if (e.clientY <= 10 && !sessionStorage.getItem('pubnarratives_lead_seen')) {
                     openLeadModal();
                 }
             });
+            setTimeout(() => {
+                if (!sessionStorage.getItem('pubnarratives_lead_seen')) {
+                    openLeadModal();
+                }
+            }, 10000);
         }
+
+        // Initialisation immédiate de toutes les icônes Lucide
+        lucide.createIcons();
     </script>
 </body>
 </html>
