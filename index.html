@@ -99,7 +99,7 @@
                 <nav class="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-stone-300">
                     <a href="#enjeux" class="hover:text-amberLuxe-400 transition-colors">Le Constat</a>
                     <a href="#methode" class="hover:text-amberLuxe-400 transition-colors">La Méthode</a>
-                    <a href="#demo" class="hover:text-amberLuxe-400 transition-colors">Exemple</a>
+                    <a href="#etapes" class="hover:text-amberLuxe-400 transition-colors">Étapes</a>
                     <a href="#tarifs" class="hover:text-amberLuxe-400 transition-colors">Tarifs</a>
                 </nav>
 
@@ -389,7 +389,6 @@
                         <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-6 flex flex-col justify-between">
                             <div class="space-y-5">
                                 <div class="w-12 h-12 rounded-2xl bg-amberLuxe-400/10 border border-amberLuxe-400/20 flex items-center justify-center text-amberLuxe-400">
-                                    <!-- Icône Cible / Capture d'attention -->
                                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -415,7 +414,6 @@
                         <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-6 flex flex-col justify-between border-amberLuxe-500/20">
                             <div class="space-y-5">
                                 <div class="w-12 h-12 rounded-2xl bg-amberLuxe-400/10 border border-amberLuxe-400/20 flex items-center justify-center text-amberLuxe-400">
-                                    <!-- Icône Clarté / Éclair / Révélation -->
                                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                     </svg>
@@ -440,7 +438,6 @@
                         <div class="glass-panel glass-panel-hover p-8 rounded-3xl space-y-6 flex flex-col justify-between">
                             <div class="space-y-5">
                                 <div class="w-12 h-12 rounded-2xl bg-amberLuxe-400/10 border border-amberLuxe-400/20 flex items-center justify-center text-amberLuxe-400">
-                                    <!-- Icône Étoile / Positionnement premium -->
                                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                     </svg>
@@ -483,87 +480,13 @@
                 </div>
             </section>
 
-            <!-- SECTION 4 : LA DÉMONSTRATION / LECTEUR HORIZONTAL 16:9 -->
-            <section id="demo" class="py-24 px-4 border-t border-white/[0.05] relative">
-                <div class="max-w-5xl mx-auto space-y-12">
-                    
-                    <div class="max-w-2xl space-y-4">
-                        <div class="inline-flex items-center gap-2 text-xs font-mono text-amberLuxe-400 tracking-widest uppercase">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 03 // Démonstration Visuelle
-                        </div>
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                            L'anatomie d'une vidéo courte qui fait passer à l'action.
-                        </h2>
-                        <p class="text-stone-400 text-sm sm:text-base leading-relaxed">
-                            Voyez comment chaque séquence désamorce une hésitation et transforme la simple curiosité en engagement concret.
-                        </p>
-                    </div>
-
-                    <!-- Cadre Cinématique Horizontal 16:9 -->
-                    <div class="glass-panel p-3 sm:p-4 rounded-[2rem] border border-white/10 shadow-2xl relative overflow-hidden group">
-                        
-                        <div class="flex items-center justify-between px-4 py-2 border-b border-white/[0.05] text-[11px] font-mono text-stone-400 mb-3">
-                            <span class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-amberLuxe-400 animate-pulse"></span>
-                                AUTOPSIE NARRATIVE // STUDIO PUBNARRATIVES
-                            </span>
-                            <span class="hidden sm:inline-block">DÉMONSTRATION D'UN SCRIPT QUI DÉCLENCHE L'ACTION</span>
-                            <span class="text-amberLuxe-400 font-bold">45 SECONDES CHRONO</span>
-                        </div>
-
-                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-obsidian-900 border border-white/5 flex items-center justify-center">
-                            <video 
-                                id="demo-video"
-                                src="videos/demo.mp4" 
-                                controls 
-                                playsinline 
-                                preload="metadata"
-                                class="w-full h-full object-cover">
-                                Votre navigateur ne supporte pas la lecture de vidéos.
-                            </video>
-                        </div>
-
-                        <div class="pt-4 px-2 grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-1">
-                                <div class="flex items-center justify-between text-[10px] font-mono text-amberLuxe-400">
-                                    <span>ÉTAPE 1</span>
-                                    <span>00:00 - 00:10</span>
-                                </div>
-                                <p class="text-xs text-white font-medium">La Tension Initiale</p>
-                                <p class="text-[11px] text-stone-400 leading-tight">Formuler le point de friction pour créer une identification immédiate.</p>
-                            </div>
-
-                            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-1">
-                                <div class="flex items-center justify-between text-[10px] font-mono text-amberLuxe-400">
-                                    <span>ÉTAPE 2</span>
-                                    <span>00:10 - 00:30</span>
-                                </div>
-                                <p class="text-xs text-white font-medium">La Preuve en Mouvement</p>
-                                <p class="text-[11px] text-stone-400 leading-tight">Démontrer l'efficacité de la solution pour effacer le doute.</p>
-                            </div>
-
-                            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-1">
-                                <div class="flex items-center justify-between text-[10px] font-mono text-amberLuxe-400">
-                                    <span>ÉTAPE 3</span>
-                                    <span>00:30 - 00:45</span>
-                                </div>
-                                <p class="text-xs text-white font-medium">La Résolution & L'Action</p>
-                                <p class="text-[11px] text-stone-400 leading-tight">Célébrer la victoire finale et donner une consigne d'action directe.</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- SECTION 5 : THE PLAN (ZÉRO PRISE DE TÊTE) -->
+            <!-- SECTION 4 : THE PLAN (ZÉRO PRISE DE TÊTE) -->
             <section id="etapes" class="py-24 px-4 border-t border-white/[0.05] relative">
                 <div class="max-w-5xl mx-auto space-y-16">
                     
                     <div class="max-w-2xl space-y-4">
                         <div class="inline-flex items-center gap-2 text-xs font-mono text-amberLuxe-400 tracking-widest uppercase">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 04 // Zéro Prise de Tête
+                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 03 // Zéro Prise de Tête
                         </div>
                         <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
                             Votre vidéo prête à publier en 3 étapes simples.
@@ -631,13 +554,13 @@
                 </div>
             </section>
 
-            <!-- SECTION 6 : THE PRICE CHOICES / GRILLE TARIFAIRE -->
+            <!-- SECTION 5 : THE PRICE CHOICES / GRILLE TARIFAIRE -->
             <section id="tarifs" class="py-24 px-4 border-t border-white/[0.05] relative">
                 <div class="max-w-5xl mx-auto space-y-16">
                     
                     <div class="max-w-2xl space-y-4">
                         <div class="inline-flex items-center gap-2 text-xs font-mono text-amberLuxe-400 tracking-widest uppercase">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 05 // Un Choix Sans Risque
+                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 04 // Un Choix Sans Risque
                         </div>
                         <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
                             Un investissement rentabilisé dès vos premiers clients.
@@ -750,13 +673,13 @@
                 </div>
             </section>
 
-            <!-- SECTION 7 : LE PARAGRAPHE EXPLICATIF ET LA FAQ -->
+            <!-- SECTION 6 : LE PARAGRAPHE EXPLICATIF ET LA FAQ -->
             <section id="faq" class="py-24 px-4 border-t border-white/[0.05] relative">
                 <div class="max-w-4xl mx-auto space-y-16">
                     
                     <div class="glass-panel p-8 sm:p-12 rounded-3xl space-y-6 border border-white/10">
                         <div class="inline-flex items-center gap-2 text-xs font-mono text-amberLuxe-400 tracking-widest uppercase">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 06 // Pourquoi la clarté gagne toujours
+                            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-400"></span> 05 // Pourquoi la clarté gagne toujours
                         </div>
                         <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                             Vos clients n'achètent pas ce qu'il y a de mieux. Ils choisissent ce qu'ils comprennent rapidement.
