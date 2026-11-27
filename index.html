@@ -125,7 +125,7 @@
                             Commander ma vidéo publicitaire <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </a>
                         <button onclick="openLeadModal()" class="w-full sm:w-auto glass-panel glass-panel-hover text-stone-200 font-bold px-6 py-4 rounded-2xl text-sm transition-all flex items-center justify-center gap-2">
-                            <i data-lucide="file-text" class="w-4 h-4 text-amberLuxe-400"></i> Guide gratuit : 5 Erreurs Publicitaires
+                            <i data-lucide="file-text" class="w-4 h-4 text-amberLuxe-400"></i> Guide gratuit : 7 Séquences Vidéos qui Vendent
                         </button>
                     </div>
 
@@ -660,7 +660,7 @@
 
     </div>
 
-    <!-- MODAL DU LEAD GENERATOR -->
+    <!-- MODAL DU LEAD GENERATOR (FIREBASE + GOOGLE DRIVE) -->
     <div id="lead-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
         <div class="glass-panel p-8 sm:p-10 rounded-[2.5rem] border border-white/10 max-w-lg w-full relative shadow-2xl space-y-6 transform scale-95 transition-all duration-300" id="lead-modal-content">
             
@@ -668,42 +668,57 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
-            <div class="space-y-3">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amberLuxe-500/10 border border-amberLuxe-500/20 text-[10px] font-mono tracking-widest text-amberLuxe-400 uppercase">
-                    Guide Pratique Offert
+            <!-- ÉTAT 1 : FORMULAIRE DE CAPTURE -->
+            <div id="lead-form-container" class="space-y-6">
+                <div class="space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amberLuxe-500/10 border border-amberLuxe-500/20 text-[10px] font-mono tracking-widest text-amberLuxe-400 uppercase">
+                        Guide Pratique Offert (7 pages)
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+                        Ne soyez plus ignorés
+                    </h3>
+                    <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">
+                        Les <strong>7 séquences vidéos</strong> pour capter l'attention de vos clients en quelques secondes et les convaincre de vous choisir (sans gros budget ni équipe de tournage).
+                    </p>
                 </div>
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
-                    Les 5 erreurs de communication qui font fuir vos prospects
-                </h3>
-                <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">
-                    Le guide de 6 pages pour transformer l'attention en décision sans budget de tournage exorbitant.
-                </p>
+
+                <form id="firebase-lead-form" class="space-y-4">
+                    <div>
+                        <label class="block text-[11px] font-mono uppercase tracking-wider text-stone-400 mb-1.5">Votre Prénom ou Nom de Marque</label>
+                        <input type="text" id="lead-name" required placeholder="Ex: Sarah ou Studio Alpha" class="w-full px-4 py-3 rounded-xl bg-obsidian-900 border border-white/10 text-white placeholder-stone-600 text-xs focus:outline-none focus:border-amberLuxe-500 transition-colors">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-mono uppercase tracking-wider text-stone-400 mb-1.5">Votre Adresse Email</label>
+                        <input type="email" id="lead-email" required placeholder="contact@votre-projet.com" class="w-full px-4 py-3 rounded-xl bg-obsidian-900 border border-white/10 text-white placeholder-stone-600 text-xs focus:outline-none focus:border-amberLuxe-500 transition-colors">
+                    </div>
+
+                    <button type="submit" id="lead-submit-btn" class="w-full bg-amberLuxe-500 hover:bg-amberLuxe-400 text-obsidian-950 font-black py-4 rounded-xl text-xs uppercase tracking-wider transition-all transform active:scale-95 shadow-lg shadow-amberLuxe-500/20 flex items-center justify-center gap-2">
+                        Recevoir mon guide gratuit (PDF) <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </form>
+
+                <div class="text-center pt-2">
+                    <button onclick="closeLeadModal()" class="text-[11px] font-mono text-stone-400 hover:text-stone-300 transition-colors">
+                        Non merci, je préfère laisser mes concurrents capter l'attention
+                    </button>
+                </div>
             </div>
 
-            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
-                <input type="hidden" name="access_key" value="82abc08e-6c5e-4c5b-8384-d4846a007c3a">
-                <input type="hidden" name="subject" value="Nouveau prospect - Guide Gratuit PubNarratives">
-                <input type="hidden" name="from_name" value="PubNarratives Lead">
-                
-                <div>
-                    <label class="block text-[11px] font-mono uppercase tracking-wider text-stone-400 mb-1.5">Votre Prénom ou Nom de Marque / Projet</label>
-                    <input type="text" name="name" required placeholder="Ex: Sarah ou Studio Alpha" class="w-full px-4 py-3 rounded-xl bg-obsidian-900 border border-white/10 text-white placeholder-stone-600 text-xs focus:outline-none focus:border-amberLuxe-500 transition-colors">
+            <!-- ÉTAT 2 : SUCCÈS & ACCÈS IMMÉDIAT AU PDF -->
+            <div id="lead-success-container" class="hidden text-center space-y-6 py-4">
+                <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto">
+                    <i data-lucide="check-circle-2" class="w-8 h-8"></i>
                 </div>
-
-                <div>
-                    <label class="block text-[11px] font-mono uppercase tracking-wider text-stone-400 mb-1.5">Votre Adresse Email Professionnelle</label>
-                    <input type="email" name="email" required placeholder="contact@votre-projet.com" class="w-full px-4 py-3 rounded-xl bg-obsidian-900 border border-white/10 text-white placeholder-stone-600 text-xs focus:outline-none focus:border-amberLuxe-500 transition-colors">
+                <div class="space-y-2">
+                    <h3 class="text-2xl font-extrabold text-white">Votre guide est prêt !</h3>
+                    <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">
+                        Merci ! Votre téléchargement devrait démarrer automatiquement. Si ce n'est pas le cas, cliquez sur le bouton ci-dessous.
+                    </p>
                 </div>
-
-                <button type="submit" class="w-full bg-amberLuxe-500 hover:bg-amberLuxe-400 text-obsidian-950 font-black py-4 rounded-xl text-xs uppercase tracking-wider transition-all transform active:scale-95 shadow-lg shadow-amberLuxe-500/20 flex items-center justify-center gap-2">
-                    Recevoir mon exemplaire gratuit (PDF) <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </button>
-            </form>
-
-            <div class="text-center pt-2">
-                <button onclick="closeLeadModal()" class="text-[11px] font-mono text-stone-400 hover:text-stone-300 transition-colors">
-                    Non merci, je préfère laisser mes concurrents capter l'attention
-                </button>
+                <a id="drive-download-link" href="https://drive.google.com/uc?export=download&id=1jOR-Xjcd-bCbZmyLIBmkuSSqpkg6nupO" target="_blank" rel="noopener noreferrer" class="w-full bg-amberLuxe-500 hover:bg-amberLuxe-400 text-obsidian-950 font-black py-4 rounded-xl text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-amberLuxe-500/20">
+                    <i data-lucide="download" class="w-4 h-4"></i> Télécharger le PDF maintenant
+                </a>
             </div>
 
         </div>
@@ -821,6 +836,66 @@
 
         // Initialisation immédiate de toutes les icônes Lucide
         lucide.createIcons();
+    </script>
+
+    <!-- CONNEXION FIREBASE FIRESTORE & ANALYTICS -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA1OdJAyZ-r7wvJqifUPDHScg4eOaITySs",
+            authDomain: "pubnarratives.firebaseapp.com",
+            projectId: "pubnarratives",
+            storageBucket: "pubnarratives.firebasestorage.app",
+            messagingSenderId: "612376562066",
+            appId: "1:612376562066:web:77a6b48fdb7fd779c2d94b",
+            measurementId: "G-TLLS5GGLNJ"
+        };
+
+        const DRIVE_PDF_URL = "https://drive.google.com/uc?export=download&id=1jOR-Xjcd-bCbZmyLIBmkuSSqpkg6nupO";
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        const leadForm = document.getElementById('firebase-lead-form');
+        const submitBtn = document.getElementById('lead-submit-btn');
+        const formContainer = document.getElementById('lead-form-container');
+        const successContainer = document.getElementById('lead-success-container');
+
+        if (leadForm) {
+            leadForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('lead-name').value.trim();
+                const email = document.getElementById('lead-email').value.trim();
+
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Enregistrement en cours...';
+
+                try {
+                    await addDoc(collection(db, "leads_pubnarratives"), {
+                        name: name,
+                        email: email,
+                        guide: "Ne soyez plus ignores - 7 sequences",
+                        createdAt: serverTimestamp()
+                    });
+
+                    sessionStorage.setItem('pubnarratives_lead_seen', 'true');
+                    
+                    formContainer.classList.add('hidden');
+                    successContainer.classList.remove('hidden');
+                    window.open(DRIVE_PDF_URL, '_blank');
+
+                } catch (error) {
+                    console.error("Erreur Firebase :", error);
+                    alert("Une erreur est survenue lors de l'enregistrement. Vérifiez que Firestore est bien activé.");
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Recevoir mon guide gratuit (PDF)';
+                }
+            });
+        }
     </script>
 </body>
 </html>
